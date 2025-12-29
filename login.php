@@ -12,13 +12,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $stmt->execute([$email]);
     $admin = $stmt->fetch(PDO::FETCH_ASSOC);
 
-   if ($admin && password_verify($password, $admin['password'])) {
-    $_SESSION['admin_id'] = $admin['id'];
-    $_SESSION['admin_email'] = $admin['email'];
-    header("Location: dashboard.php");
-    exit;
-}
-
+    if ($admin && password_verify($password, $admin['password'])) {
+        $_SESSION['admin_id'] = $admin['id'];
+        $_SESSION['admin_email'] = $admin['email'];
+        header("Location: dashboard.php");
+        exit;
     } else {
         $error = "Invalid email or password";
     }
@@ -30,10 +28,25 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <head>
     <title>Admin Login</title>
     <style>
-        body { font-family: Arial; background: #f4f4f4; }
-        .box { width: 350px; margin: 100px auto; background: white; padding: 20px; border-radius: 5px; }
-        input, button { width: 100%; padding: 10px; margin-top: 10px; }
-        button { background: green; color: white; border: none; }
+        body { font-family: Arial, sans-serif; background: #f4f4f4; }
+        .box {
+            width: 350px;
+            margin: 100px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+        }
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+        }
+        button {
+            background: green;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
         .error { color: red; }
     </style>
 </head>
@@ -42,8 +55,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <div class="box">
     <h2>Admin Login</h2>
 
-    <?php if ($error): ?>
-        <p class="error"><?= $error ?></p>
+    <?php if (!empty($error)): ?>
+        <p class="error"><?= htmlspecialchars($error) ?></p>
     <?php endif; ?>
 
     <form method="POST">
@@ -55,3 +68,4 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 </body>
 </html>
+
