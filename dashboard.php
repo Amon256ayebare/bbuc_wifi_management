@@ -1,10 +1,11 @@
+<?php
+session_start();
 
-<?php session_start(); require 'db.php';
-if(!isset($_SESSION['admin'])) header("Location: login.php");
-$total=$db->query("SELECT COUNT(*) FROM users")->fetchColumn();
-$active=$db->query("SELECT COUNT(*) FROM users WHERE status='active'")->fetchColumn();
-$blocked=$db->query("SELECT COUNT(*) FROM users WHERE status='blocked'")->fetchColumn();
-?>
+if (!isset($_SESSION['admin_id'])) {
+    header("Location: login.php");
+    exit;
+}
+
 <!doctype html><html><head>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
