@@ -7,5 +7,6 @@ $password = password_hash("admin123", PASSWORD_DEFAULT);
 $stmt = $pdo->prepare("INSERT OR IGNORE INTO admins (email, password) VALUES (?, ?)");
 $stmt->execute([$email, $password]);
 
-echo "Admin created successfully";
+echo "Admin user created";
+
 
