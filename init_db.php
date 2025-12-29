@@ -9,14 +9,6 @@ CREATE TABLE IF NOT EXISTS admins (
 );
 ");
 
-$pdo->exec("
-CREATE TABLE IF NOT EXISTS users (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT,
-    email TEXT UNIQUE,
-    password TEXT
-);
-");
+echo "Admins table created successfully";
 
-echo "Database initialized successfully";
 
